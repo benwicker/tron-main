@@ -1,12 +1,19 @@
 <template>
   <div class="tron">
-    Welcome
-    <canvas id="canvas" style="border: 1px solid" width="600" height="300"></canvas>
+    <h4>Welcome</h4>
+    <!-- <canvas id="canvas" style="border: 1px solid" width="600" height="300"></canvas> -->
+    <br />
+    <tron-canvas></tron-canvas>
   </div>
 </template>
 
 <script>
+import TronCanvas from "@/components/TronCanvas.vue";
+
 export default {
+  components: {
+    TronCanvas
+  },
   mounted: function() {
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
