@@ -1,12 +1,18 @@
 <template>
   <div>
-    <canvas id="tronCanvas" style="border: 1px solid" width="500" height="500"></canvas>
+    <canvas
+      id="tronCanvas"
+      style="border: 1px solid"
+      width="500"
+      height="500"
+    >Sorry you don't support canvas</canvas>
   </div>
 </template>
 
 <script>
 import { Arrow } from "@/models/arrow.js";
-import { Grid, Player, Directions } from "@/models/tron-models.js";
+import { Grid, Player } from "@/models/tron-models.js";
+import { Directions, Keys } from "@/models/enums.js";
 
 export default {
   name: "TronCanvas",
@@ -41,6 +47,23 @@ export default {
         window.cancelAnimationFrame(_this.raf);
         _this.raf = 0;
       });
+
+      window.addEventListener("keyup", e => {
+          switch(e.which){
+              case Keys.UP:
+              _this.p1.currentDirection = Directions.UP;
+              break;
+              case Keys.DOWN:
+              _this.p1.currentDirection = Directions.DOWN;
+              break;
+              case Keys.LEFT:
+              _this.p1.currentDirection = Directions.LEFT;
+              break;
+              case Keys.RIGHT:
+              _this.p1.currentDirection = Directions.RIGHT;
+              break;
+          }
+      });
     },
 
     progress: function() {
@@ -51,12 +74,16 @@ export default {
         if (_this.raf) {
           _this.raf = window.requestAnimationFrame(_this.progress);
         }
-      }, 100);
+      }, 50);
     },
 
     drawP1: function() {
       this.ctx.strokeStyle = "red";
       this.ctx.fill(this.p1.draw());
+    },
+
+    setDir: function(dir) {
+      this.p1.currentDirection = dir;
     }
   },
   mounted() {
