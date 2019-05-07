@@ -1,3 +1,10 @@
+export const Directions = {
+    UP: 'up',
+    DOWN: 'down',
+    LEFT: 'left',
+    RIGHT: 'right'
+}
+
 export class Grid {
     
     constructor (w, h, numUnits) {
@@ -42,10 +49,11 @@ export class Grid {
 }
 
 export class Player {
-    constructor (grid, x, y) {
+    constructor (grid, x, y, dir) {
         this.grid = grid;
         this.x = x;
         this.y = y;
+        this.currentDirection = dir;
     }
 
     draw() {
@@ -56,4 +64,28 @@ export class Player {
         this.y++;
         return this.grid.draw(this.x, this.y);
     }
+
+    setDirection(dir) {
+        this.currentDirection = dir;
+    }
+
+    move(){
+        switch(this.currentDirection){
+            case Directions.UP:
+            this.y--;
+            break;
+            case Directions.DOWN:
+            this.y++;
+            break;
+            case Directions.LEFT:
+            this.x--;
+            break;
+            case Directions.RIGHT:
+            this.x++;
+            break;
+        }
+
+        return this.grid.draw(this.x, this.y);
+    }
 }
+
