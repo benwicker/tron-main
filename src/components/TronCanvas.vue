@@ -16,7 +16,7 @@ export default {
       ctx: {},
       g: {},
       p1: {},
-      raf: {},
+      raf: {}
     };
   },
   methods: {
@@ -26,13 +26,21 @@ export default {
       this.g = new Grid(this.canvas.width, this.canvas.height, 100);
       this.p1 = new Player(this.g, 25, 25, Directions.RIGHT);
 
-      this.ctx.strokeStyle = "rgba(22, 124, 124, 0.49)";
-    //   this.ctx.stroke(this.g.createGrid());
+      this.ctx.strokeStyle = "rgba(22, 124, 124, 0.19)";
+      this.ctx.stroke(this.g.createGrid());
       this.drawP1();
     },
 
     addEvents: function() {
+      let _this = this;
+      this.canvas.addEventListener("mouseover", e => {
+        _this.raf = window.requestAnimationFrame(_this.progress);
+      });
 
+      this.canvas.addEventListener("mouseout", e => {
+        window.cancelAnimationFrame(_this.raf);
+        _this.raf = 0;
+      });
     },
 
     progress: function() {
@@ -40,7 +48,9 @@ export default {
       this.drawP1();
       var _this = this;
       setTimeout(() => {
-        _this.raf = window.requestAnimationFrame(_this.progress);
+        if (_this.raf) {
+          _this.raf = window.requestAnimationFrame(_this.progress);
+        }
       }, 100);
     },
 
@@ -52,15 +62,6 @@ export default {
   mounted() {
     this.initField();
     this.addEvents();
-
-    let _this = this;
-    this.canvas.addEventListener("mouseover", e => {
-      _this.raf = window.requestAnimationFrame(_this.progress);
-    });
-
-    this.canvas.addEventListener("mouseout", e => {
-      window.cancelAnimationFrame(_this.raf);
-    });
   }
 };
 </script>
