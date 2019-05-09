@@ -62,15 +62,23 @@ export class Game {
         
         if (timeElapsed >= this.settings.gameSpeed) {
             this.startTime = timestamp;
-            this.players.forEach((p) => {
-                p.move();
-                let crashed = this.detectOutOfBounds(p.x, p.y);
+            this.players.forEach((p, i) => {
+                p.move();                
 
-                if (crashed) {
+                // detect collision with other players heads
+
+                if (this.detectOutOfBounds(p.x, p.y)) {
                     this.gameOver();
                     return;
                 }
 
+                if (this.detectCollisionWithLine(p.x, p.y)) {
+                    this.gameOver();
+                    return;
+                }
+
+                // no collision and player is still alive
+                this.gameBoard.setValue(p.x, p.y, i + 1);
                 p.path.addPath(this.grid.draw(p.x, p.y));
                 this.ctx.fillStyle = p.color;
                 this.ctx.fill(p.path);
@@ -91,6 +99,10 @@ export class Game {
 
     detectOutOfBounds(x, y) {
         return (x < 0 || x > this.sizeX || y < 0 || y > this.sizeY);
+    }
+
+    detectCollisionWithLine(x, y) {
+        return this.gameBoard.getValue(x, y);
     }
 
 }
