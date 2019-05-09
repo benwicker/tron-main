@@ -11,83 +11,52 @@
 
 <script>
 import { Arrow } from "@/models/arrow.js";
-import { Grid, Player } from "@/models/tron-models.js";
+import { Grid } from "@/models/grid.js";
 import { Directions, Keys } from "@/models/enums.js";
+import { Player } from "@/models/player.js";
+import { Game } from "@/models/game.js";
+import { Settings } from "@/models/settings.js";
+import { Controller } from "@/models/controller.js";
 
 export default {
   name: "TronCanvas",
   data() {
     return {
+      game: {},
       canvas: {},
       ctx: {},
       g: {},
-      p1: {},
-      raf: {}
+      raf: {},
+      players: [
+        new Player(25, 25, Directions.RIGHT, "red"),
+        // new Player(25, 75, Directions.RIGHT, "blue"),
+        // new Player(75, 25, Directions.LEFT, "green"),
+        // new Player(75, 75, Directions.LEFT, "black")
+      ],
+      c: {}
     };
   },
   methods: {
-    initField: function() {
-      this.canvas = document.getElementById("tronCanvas");
-      this.ctx = this.canvas.getContext("2d");
-      this.g = new Grid(this.canvas.width, this.canvas.height, 100);
-      this.p1 = new Player(this.g, 25, 25, Directions.RIGHT);
-
-      this.ctx.strokeStyle = "rgba(22, 124, 124, 0.19)";
-      this.ctx.stroke(this.g.createGrid());
-      this.drawP1();
-    },
-
     addEvents: function() {
       let _this = this;
-      this.canvas.addEventListener("mouseover", e => {
-        _this.raf = window.requestAnimationFrame(_this.progress);
-      });
-
-      this.canvas.addEventListener("mouseout", e => {
-        window.cancelAnimationFrame(_this.raf);
-        _this.raf = 0;
-      });
-
       window.addEventListener("keyup", e => {
-          switch(e.which){
-              case Keys.UP:
-              _this.p1.currentDirection = Directions.UP;
-              break;
-              case Keys.DOWN:
-              _this.p1.currentDirection = Directions.DOWN;
-              break;
-              case Keys.LEFT:
-              _this.p1.currentDirection = Directions.LEFT;
-              break;
-              case Keys.RIGHT:
-              _this.p1.currentDirection = Directions.RIGHT;
-              break;
-          }
+        if (e && e.code == Keys.SPACE){
+          _this.game.start();
+        }
       });
     },
-
-    progress: function() {
-      this.p1.move();
-      this.drawP1();
-      var _this = this;
-      setTimeout(() => {
-        if (_this.raf) {
-          _this.raf = window.requestAnimationFrame(_this.progress);
-        }
-      }, 50);
-    },
-
-    drawP1: function() {
-      this.ctx.strokeStyle = "red";
-      this.ctx.fill(this.p1.draw());
-    },
-
-    setDir: function(dir) {
-      this.p1.currentDirection = dir;
-    }
   },
   mounted() {
-    this.initField();
+    this.settings = new Settings(100, 100, 3, "rgba(22, 124, 124, 0.19)");
+    this.canvas = document.getElementById("tronCanvas");
+
+    // temp controller
+    this.c = new Controller(this.players[0], window, Keys.UP, Keys.DOWN, Keys.LEFT, Keys.RIGHT);
+    // ---------------
+    
+    this.game = new Game(this.players, this.settings, this.canvas);
+    this.game.initGame();
+
     this.addEvents();
   }
 };
