@@ -2,10 +2,14 @@ import { Directions } from "@/models/enums.js";
 
 export class Player {
     constructor(x, y, dir, color) {
+        this.startX = x;
+        this.startY = y;
+        this.startDirection = dir;
         this.x = x;
         this.y = y;
         this.currentDirection = dir;
         this.color = color;
+        this.wins = 0;
         this.path = new Path2D();
     }
 
@@ -31,6 +35,9 @@ export class Player {
     }
 
     reset() {
-        console.log("not implemented yet");
+        this.x = this.startX;
+        this.y = this.startY;
+        this.currentDirection = this.startDirection;
+        this.path = new Path2D();
     }
 }

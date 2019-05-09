@@ -6,10 +6,14 @@ export const Directions = {
 }
 
 export const Keys = {
-    UP: 38,
-    DOWN: 40,
-    LEFT: 37,
-    RIGHT: 39,
+    UP: "ArrowUp",
+    DOWN: "ArrowDown",
+    LEFT: "ArrowLeft",
+    RIGHT: "ArrowRight",
+    W: "KeyW",
+    A: "KeyA",
+    S: "KeyS",
+    D: "KeyD",
     SPACE: "Space"
 }
 

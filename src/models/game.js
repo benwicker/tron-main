@@ -27,13 +27,24 @@ export class Game {
     }
 
     initGame() {
+        // clear anything old out
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.gameState = GameStates.NOT_STARTED;
+        this.gameBoard.reset();
+        // put crashed players into the players category
+        this.startTime = null;
+
         // draw grid
         this.gridPath = this.grid.createGrid();
         this.ctx.strokeStyle = this.settings.gridColor;
-        this.ctx.stroke(this.gridPath);
+        // this.ctx.stroke(this.gridPath);
 
         // get player 2d objects
         this.players.forEach((p) => {
+            // clear out old player data
+            p.reset();
+
+            // draw the player on the starting position
             p.path.addPath(this.grid.draw(p.x, p.y));
             this.ctx.fillStyle = p.color;
             this.ctx.fill(p.path);
@@ -54,6 +65,10 @@ export class Game {
             window.cancelAnimationFrame(this.raf);
             this.raf = 0;
         }
+
+        else if (this.gameState == GameStates.GAME_OVER) {
+            this.initGame();
+        }
     }
 
     updateGame(timestamp) {
@@ -68,11 +83,13 @@ export class Game {
                 // detect collision with other players heads
 
                 if (this.detectOutOfBounds(p.x, p.y)) {
+                    console.log("out of bounds");
                     this.gameOver();
                     return;
                 }
 
                 if (this.detectCollisionWithLine(p.x, p.y)) {
+                    console.log("collision with line");
                     this.gameOver();
                     return;
                 }
@@ -94,7 +111,7 @@ export class Game {
         this.gameState = GameStates.GAME_OVER;
         window.cancelAnimationFrame(this.raf);
         this.raf = 0;
-        alert("GAME OVER");
+        // alert("GAME OVER");
     }
 
     detectOutOfBounds(x, y) {
@@ -106,23 +123,3 @@ export class Game {
     }
 
 }
-
-
-
-
-// this.players.forEach((p, i) => {
-//     // move each player
-//     p.move();
-
-//     // detect out of bounds
-//     // if (p.x < 0 || p.y < 0 || p.x >= this.numUnits || p.y >= this.numUnits) {
-//     //     inactivePlayers.push(this.players.splice(i, 1));
-//     //     continue;
-//     // }
-
-//     // detect player collision
-//     // detect line collision
-//     // update board
-//     // redraw player
-//     this.draw(p.x, p.y, path);
-// });
