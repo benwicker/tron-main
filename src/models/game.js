@@ -64,6 +64,13 @@ export class Game {
             this.startTime = timestamp;
             this.players.forEach((p) => {
                 p.move();
+                let crashed = this.detectOutOfBounds(p.x, p.y);
+
+                if (crashed) {
+                    this.gameOver();
+                    return;
+                }
+
                 p.path.addPath(this.grid.draw(p.x, p.y));
                 this.ctx.fillStyle = p.color;
                 this.ctx.fill(p.path);
@@ -71,6 +78,17 @@ export class Game {
         }
 
         this.raf = window.requestAnimationFrame(this.updateGame.bind(this));
+    }
+
+    gameOver() {
+        this.gameState = GameStates.GAME_OVER;
+        window.cancelAnimationFrame(this.raf);
+        this.raf = 0;
+        alert("GAME OVER");
+    }
+
+    detectOutOfBounds(x, y) {
+        return (x < 0 || x > this.sizeX || y < 0 || y > this.sizeY);
     }
 
 }
