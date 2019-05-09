@@ -77,7 +77,9 @@ export class Game {
             });
         }
 
-        this.raf = window.requestAnimationFrame(this.updateGame.bind(this));
+        if (this.raf) {
+            this.raf = window.requestAnimationFrame(this.updateGame.bind(this));
+        }
     }
 
     gameOver() {

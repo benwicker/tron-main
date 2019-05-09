@@ -17,16 +17,24 @@ export class Controller {
         this.window.addEventListener("keyup", e => {
             switch (e.which) {
                 case _this.upKey:
-                  _this.player.currentDirection = Directions.UP;
+                  if (_this.player.currentDirection != Directions.DOWN){
+                    _this.player.currentDirection = Directions.UP;
+                  }
                   break;
                 case _this.downKey:
-                  _this.player.currentDirection = Directions.DOWN;
+                  if (_this.player.currentDirection != Directions.UP){
+                    _this.player.currentDirection = Directions.DOWN;
+                  }
                   break;
                 case _this.leftKey:
-                  _this.player.currentDirection = Directions.LEFT;
+                  if (_this.player.currentDirection != Directions.RIGHT){
+                    _this.player.currentDirection = Directions.LEFT;
+                  }
                   break;
                 case _this.rightKey:
-                  _this.player.currentDirection = Directions.RIGHT;
+                  if (_this.player.currentDirection != Directions.LEFT){
+                    _this.player.currentDirection = Directions.RIGHT;
+                  }
                   break;
                 default:
                   return;
