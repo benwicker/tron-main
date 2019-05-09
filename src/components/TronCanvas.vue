@@ -26,7 +26,6 @@ export default {
       canvas: {},
       ctx: {},
       g: {},
-      raf: {},
       players: [
         new Player(25, 25, Directions.RIGHT, "red"),
         // new Player(25, 75, Directions.RIGHT, "blue"),
