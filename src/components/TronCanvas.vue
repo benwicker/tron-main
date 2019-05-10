@@ -20,6 +20,9 @@ import { Controller } from "@/models/controller.js";
 
 export default {
   name: "TronCanvas",
+  props: {
+    settings: Settings
+  },
   data() {
     return {
       game: {},
@@ -48,8 +51,6 @@ export default {
   },
   mounted() {
     this.canvas = document.getElementById("tronCanvas");
-
-    this.settings = new Settings(100, 100, 0, "rgba(22, 124, 124, 0.19)");
 
     // temp controller
     this.c1 = new Controller(this.players[0], window, Keys.W, Keys.S, Keys.A, Keys.D);
