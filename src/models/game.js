@@ -37,7 +37,7 @@ export class Game {
         // draw grid
         this.gridPath = this.grid.createGrid();
         this.ctx.strokeStyle = this.settings.gridColor;
-        // this.ctx.stroke(this.gridPath);
+        this.ctx.stroke(this.gridPath);
 
         // get player 2d objects
         this.players.forEach((p) => {

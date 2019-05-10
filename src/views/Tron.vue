@@ -1,9 +1,20 @@
 <template>
   <div class="tron">
-    <h4>Welcome</h4>
-    <!-- <canvas id="canvas" style="border: 1px solid" width="600" height="300"></canvas> -->
-    <br />
     <tron-canvas></tron-canvas>
+    <hr>
+
+    <b-row class="justify-content-md-center">
+      <b-col sm="2">Game Speed = {{settings.gameSpeed}}</b-col>
+      <b-col sm="5">
+        <b-form-input type="range" v-model="settings.gameSpeed" min="0" max="50"></b-form-input>
+      </b-col>
+    </b-row>
+        <b-row class="justify-content-md-center">
+      <b-col sm="2">Grid Color</b-col>
+      <b-col sm="5">
+        <b-form-input type="color" v-model="settings.gridColor"></b-form-input>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -14,55 +25,13 @@ export default {
   components: {
     TronCanvas
   },
-  mounted: function() {
-    // var canvas = document.getElementById("canvas");
-    // var ctx = canvas.getContext("2d");
-    // var raf;
-
-    // var ball = {
-    //   x: 100,
-    //   y: 100,
-    //   vx: 50,
-    //   vy: 50,
-    //   radius: 25,
-    //   color: "blue",
-    //   draw: function() {
-    //     ctx.beginPath();
-    //     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-    //     ctx.closePath();
-    //     ctx.fillStyle = this.color;
-    //     ctx.fill();
-    //   }
-    // };
-
-    // function draw() {
-    //   // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //   ball.draw();
-    //   ball.x += ball.vx;
-    //   ball.y += ball.vy;
-
-    //   if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
-    //     ball.vy = -ball.vy;
-    //   }
-    //   if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
-    //     ball.vx = -ball.vx;
-    //   }
-
-    //   ball.vy *= 0.99;
-    //   ball.vy += 0.25;
-
-    //   raf = window.requestAnimationFrame(draw);
-    // }
-
-    // canvas.addEventListener("mouseover", function(e) {
-    //   raf = window.requestAnimationFrame(draw);
-    // });
-
-    // canvas.addEventListener("mouseout", function(e) {
-    //   window.cancelAnimationFrame(raf);
-    // });
-
-    // ball.draw();
+  data() {
+    return {
+      settings: {
+        gameSpeed: "3",
+        gridColor: "rgba(22, 124, 124, 0.19)"
+      }
+    };
   }
 };
 </script>

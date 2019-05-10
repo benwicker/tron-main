@@ -27,9 +27,9 @@ export default {
       ctx: {},
       g: {},
       players: [
-        new Player(100, 100, Directions.RIGHT, "purple"),
+        new Player(25, 25, Directions.RIGHT, "purple"),
         // new Player(25, 75, Directions.RIGHT, "blue"),
-        new Player(600, 600, Directions.LEFT, "orange"),
+        // new Player(600, 600, Directions.LEFT, "orange"),
         // new Player(75, 75, Directions.LEFT, "black")
       ],
       c1: {},
@@ -49,11 +49,11 @@ export default {
   mounted() {
     this.canvas = document.getElementById("tronCanvas");
 
-    this.settings = new Settings(700, 700, 0, "rgba(22, 124, 124, 0.19)");
+    this.settings = new Settings(100, 100, 0, "rgba(22, 124, 124, 0.19)");
 
     // temp controller
     this.c1 = new Controller(this.players[0], window, Keys.W, Keys.S, Keys.A, Keys.D);
-    this.c2 = new Controller(this.players[1], window, Keys.UP, Keys.DOWN, Keys.LEFT, Keys.RIGHT);
+    // this.c2 = new Controller(this.players[1], window, Keys.UP, Keys.DOWN, Keys.LEFT, Keys.RIGHT);
     // ---------------
     
     this.game = new Game(this.players, this.settings, this.canvas);
