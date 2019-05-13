@@ -83,13 +83,13 @@ export class Game {
                 // detect collision with other players heads
 
                 if (this.detectOutOfBounds(p.x, p.y)) {
-                    console.log("out of bounds");
+                    console.log("out of bounds - x: " + p.x + ", y: " + p.y);
                     this.gameOver();
                     return;
                 }
 
                 if (this.detectCollisionWithLine(p.x, p.y)) {
-                    console.log("collision with line");
+                    console.log("collision with line - x: " + p.x + ", y: " + p.y);
                     this.gameOver();
                     return;
                 }
