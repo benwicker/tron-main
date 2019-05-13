@@ -12,6 +12,9 @@ export default {
   name: 'home',
   components: {
     // HelloWorld
-  }
+  },
+  created() {
+    this.$options.sockets.onmessage = (data) => console.log(data);
+  },
 }
 </script>
