@@ -1,6 +1,6 @@
 <template>
   <div class="tron">
-    <game-settings :settings="settings"></game-settings>
+    <!-- <settings-panel :settings="settings"></settings-panel> -->
     <br />
     <tron-canvas :settings="settings"></tron-canvas>
   </div>
@@ -8,14 +8,14 @@
 
 <script>
 import TronCanvas from "@/components/TronCanvas.vue";
-import GameSettings from "@/components/GameSettings.vue";
+import SettingsPanel from "@/views/SettingsPanel.vue";
 import { Settings } from "@/models/settings.js";
 
 
 export default {
   components: {
     TronCanvas,
-    GameSettings
+    SettingsPanel
   },
   data() {
     return {
