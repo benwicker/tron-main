@@ -5,7 +5,7 @@
 
     <b-row class="justify-content-md-center">
       <b-col col lg="10">
-        <b-card-group deck>
+        <b-card-group deck class="justify-content-center">
           <template v-for="p in players">
             <b-card :title="p.name" :key="p.id" style="max-width: 20rem;">
               <hr />

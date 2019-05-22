@@ -8,7 +8,9 @@ import store from './store'
 import './registerServiceWorker'
 import VueNativeSock from 'vue-native-websocket'
 
-Vue.use(VueNativeSock, 'ws://localhost:3000')
+Vue.use(VueNativeSock, 'ws://localhost:3000', {
+  store: store
+})
 
 Vue.config.productionTip = false
 
