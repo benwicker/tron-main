@@ -10,6 +10,10 @@ export default new Vuex.Store({
       message: '',
       reconnectError: false,
     },
+    instance: {
+      isHost: false,
+      isController: false,
+    },
     players: []
   },
   mutations: {
