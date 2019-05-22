@@ -9,7 +9,11 @@
           <template v-for="p in players">
             <b-card :title="p.name" :key="p.id" style="max-width: 20rem;">
               <hr />
-              <b-card-text>This is a player card</b-card-text>
+              <p class="text-left"><b>Id: </b>{{p.id}}</p>
+              <p class="text-left"><b>Color: </b>{{p.color}}</p>
+              <p class="text-left"><b>Start X: </b>{{p.startX}}</p>
+              <p class="text-left"><b>Start Y: </b>{{p.startY}}</p>
+              <p class="text-left"><b>Start Direction: </b>{{p.startDirection}}</p>
             </b-card>
           </template>
         </b-card-group>
@@ -40,7 +44,6 @@ export default {
     },
 
     parseData: async function(message) {
-      debugger
       console.log(message);
       let d = JSON.parse(message.data);
       if (d.player && !d.player.id) {
