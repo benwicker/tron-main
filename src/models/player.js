@@ -1,8 +1,9 @@
 import { Directions } from "@/models/enums.js";
 
 export class Player {
-    constructor(id, x, y, dir, color) {
+    constructor(id, name, x, y, dir, color) {
         this.id = id;
+        this.name = name;
         this.startX = x;
         this.startY = y;
         this.startDirection = dir;
