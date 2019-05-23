@@ -28,3 +28,8 @@ export const ServerCommands = {
     CREATE_PLAYER: "create player",
     CREATE_HOST: "create host"
 }
+
+export const ServerResponses = {
+    HOST_CREATED: "host created",
+    PLAYER_CREATED: "player created"
+}
