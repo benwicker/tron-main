@@ -62,12 +62,16 @@ export default new Vuex.Store({
       Vue.prototype.$socket.sendObj(message)
     },
 
-    hostCreated: function ({commit, state}, context) {
+    hostCreated: function ({ commit, state }, context) {
       commit('UpdateInstance', {
         isHost: true,
         isController: false,
         roomId: context.hostId
       })
+    },
+
+    playerCreated: function ({ commit, state }, context) {
+      debugger
     }
   }
 })

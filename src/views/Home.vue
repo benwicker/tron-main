@@ -45,7 +45,7 @@ export default {
     createPlayer: function() {
       let message = {
         cmd: ServerCommands.CREATE_PLAYER,
-        hostId: this.hostId
+        roomId: this.instance.roomId
       };
       this.sendMessage(message);
     },
