@@ -1,7 +1,7 @@
 <template>
   <div class="tron">
     <!-- <settings-panel :settings="settings"></settings-panel> -->
-    <h3>Room Id: {{roomId}}</h3>
+    <h3>Room Id: <b>{{roomId}}</b></h3>
     <br />
     <tron-canvas :settings="settings"></tron-canvas>
   </div>
