@@ -23,3 +23,8 @@ export const GameStates = {
     GAME_OVER: "game over",
     PAUSED: "paused"
 }
+
+export const ServerCommands = {
+    CREATE_PLAYER: "create player",
+    CREATE_HOST: "create host"
+}

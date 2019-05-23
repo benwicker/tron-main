@@ -9,7 +9,8 @@ import './registerServiceWorker'
 import VueNativeSock from 'vue-native-websocket'
 
 Vue.use(VueNativeSock, 'ws://localhost:3000', {
-  store: store
+  store: store,
+  format: 'json'
 })
 
 Vue.config.productionTip = false

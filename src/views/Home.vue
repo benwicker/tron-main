@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <h3>Welcome</h3>
-    <br>
-
-    <b-row class="justify-content-md-center">
+    <b-button @click="createPlayer()">Player</b-button> | 
+    <b-button @click="createHost()">Host</b-button>
+    <!-- <b-row class="justify-content-md-center">
       <b-col col lg="10">
         <b-card-group deck class="justify-content-center">
           <template v-for="p in players">
@@ -18,17 +18,16 @@
           </template>
         </b-card-group>
       </b-col>
-    </b-row>
-
-    <br>
-    <b-button @click="sendMessage()">Send a message</b-button>
+    </b-row>-->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Player } from "@/models/player.js";
-import { Directions } from "@/models/enums.js";
+import { Directions, ServerCommands } from "@/models/enums.js";
+import { mapActions } from 'vuex';
+
 
 export default {
   name: "home",
@@ -39,13 +38,21 @@ export default {
     };
   },
   methods: {
-    sendMessage: function() {
-      this.$socket.send("Hello");
+    ...mapActions([
+      'sendMessage'
+    ]),
+
+    createHost: function() {
+      this.sendMessage(ServerCommands.CREATE_HOST);
+    },
+
+    createPlayer: function() {
+      this.sendMessage(ServerCommands.CREATE_PLAYER);
     },
 
     parseData: async function(message) {
       console.log(message);
-      let d = JSON.parse(message.data);
+      let d = message.data;
       if (d.player && !d.player.id) {
         d.player.id = this.players.length;
         this.players.push(
