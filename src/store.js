@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { ServerResponses } from '@/models/enums.js';
+import { ServerResponses, Directions } from '@/models/enums.js';
+import { Player } from '@/models/player.js';
 
 Vue.use(Vuex)
 
@@ -71,7 +72,8 @@ export default new Vuex.Store({
     },
 
     playerCreated: function ({ commit, state }, context) {
-      debugger
+      let p = context.player;
+      state.players.push(new Player(p.id, p.name, 0, 0, Directions.DOWN, p.color));
     }
   }
 })

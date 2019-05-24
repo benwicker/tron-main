@@ -30,6 +30,10 @@
                 <b>Start Direction:</b>
                 {{p.startDirection}}
               </p>
+              <p class="text-left">
+                <b>Current Direction:</b>
+                {{p.currentDirection}}
+              </p>
             </b-card>
           </template>
         </b-card-group>
